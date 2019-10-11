@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import { createSmurf } from '../actions'
 
 
 
 const SmurfForm = props => {
+    const dispatch = useDispatch()
     const [inputData, setInputData] = useState({
         name: '',
         height: '',
@@ -37,7 +38,7 @@ const SmurfForm = props => {
                 placeholder='Age?'
                 onChange={monitorInput}
             />
-            <button onSubmit={() => props.createSmurf(inputData)}>Submit Smurf</button>
+            <button onClick={() => dispatch(createSmurf(inputData))}>Submit Smurf</button>
         </div>
     )
 }
@@ -48,7 +49,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    { createSmurf }
-)(SmurfForm);
+export default SmurfForm;
