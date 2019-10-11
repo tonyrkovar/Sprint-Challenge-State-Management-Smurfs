@@ -35,13 +35,10 @@ export const createSmurf = props => dispatch => {
         .catch(err => dispatch({ type: CREATE_SMURF_FAIL, payload: err.response }))
 }
 
-export const deleteSmurf = props => dispatch => {
+export const deleteSmurf = id => dispatch => {
     dispatch({ type: DELETE_SMURF_START });
     axios
-        .post('http://localhost:3333/smurfs', props)
-        .then(res => {
-            console.log('post response', res);
-            dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data })
-        })
+        .delete(`http://localhost:3333/smurfs/${id}`)
+        .then(console.log('deleted'))
         .catch(err => dispatch({ type: DELETE_SMURF_FAIL, payload: err.response }))
 }
